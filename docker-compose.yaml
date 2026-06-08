@@ -7,11 +7,11 @@ services:
     depends_on:
       - mongodb
     environment:
-      - MONGODB_URI=mongodb://mongodb:27017/myDatabase  
+      - MONGODB_URI=mongodb://mongodb:27017/myDatabase
       - SESSION_SECRET=1234
       - PORT=3130
-      - EMAIL_USER=chagantyteja2502@gmail.com
-      - EMAIL_PASS=yxoq bjuk rdnt alzp
+      - EMAIL_USER=naniatwork@gmail.com
+      - EMAIL_PASS=nani1234
   mongodb:
     image: mongo:latest
     ports:
