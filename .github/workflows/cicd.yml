@@ -38,7 +38,7 @@ jobs:
       run: |
         argocd login ${{ secrets.ARGOCD_SERVER }} \
           --username admin \
-          --password ${{ secrets.ARGOCD_PASSWORD }} \
+          --password Admin@123 \
           --insecure
         argocd app sync userprofile-blue-green --force
         echo "Pipeline SUCCESS!"
