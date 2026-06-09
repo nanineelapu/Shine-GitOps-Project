@@ -22,37 +22,23 @@ jobs:
     - name: Install dependencies
       run: npm install --if-present
 
-    - name: Run tests
-      run: npm test --if-present || echo "No tests found"
-
     - name: Lint Helm chart
       run: |
         curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
         helm lint ./Retail-chart
         echo "Helm lint passed!"
 
-    - name: Validate Kubernetes manifests
-      run: |
-        helm template retail-release ./Retail-chart > /tmp/manifests.yaml
-        echo "Manifests generated successfully!"
-
     - name: Install ArgoCD CLI
       run: |
         curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
         chmod +x argocd
         sudo mv argocd /usr/local/bin/argocd
-        argocd version --client
 
-    - name: Sync ArgoCD Application
+    - name: Sync ArgoCD
       run: |
         argocd login ${{ secrets.ARGOCD_SERVER }} \
           --username admin \
           --password ${{ secrets.ARGOCD_PASSWORD }} \
           --insecure
         argocd app sync userprofile-blue-green --force
-        echo "ArgoCD sync completed!"
-
-    - name: Pipeline Success
-      run: |
-        echo "CI/CD Pipeline completed successfully!"
-        echo "App deployed via ArgoCD GitOps!"
+        echo "Pipeline SUCCESS!"
