@@ -36,7 +36,7 @@ jobs:
 
     - name: Sync ArgoCD
       run: |
-        argocd login ${{ secrets.ARGOCD_SERVER }} \
+        argocd login a7afb8b95db8148a3ad07d3f1426cf20-342094697.ap-southeast-2.elb.amazonaws.com \
           --username admin \
           --password Admin@123 \
           --insecure
